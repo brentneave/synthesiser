@@ -110,13 +110,16 @@ const defaultNotes = [
 ];
 
 class Synthesiser {
-    constructor({ notes = defaultNotes } = {}) {
+    constructor({ 
+        notes = defaultNotes,
+        waveform = 'sine'
+    } = {}) {
         this.context = new AudioContext();
         this.notes = {};
         notes.forEach(({ 
             frequency,
             name, 
-            type = 'square'
+            type = waveform
         } = {}) => {
             const oscillator = this.context.createOscillator();
             oscillator.type = type;
@@ -145,6 +148,12 @@ class Synthesiser {
                 this.context.currentTime
             );
         }
+    }
+
+    setWaveForm(type) {
+        Object.keys(this.notes).forEach(
+            str => this.notes[str].oscillator.type = type
+        )
     }
 
 }
@@ -177,6 +186,7 @@ Object.keys(keys).map(
     }
 )
 
+
 document.onkeydown = event => {
     if(keys[event.code]) {
         document.getElementById(event.code).classList.add('keyActive');
@@ -191,3 +201,12 @@ document.onkeyup = event => {
     }
 };
 
+document.querySelectorAll('[name=waveform]').forEach(
+    element => {
+        element.oninput = event => {
+            if(event.target.checked) {
+                synth.setWaveForm(event.target.value);
+            }
+        }
+     }
+)

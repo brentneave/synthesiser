@@ -1,18 +1,26 @@
+* { box-sizing: border-box; }
+
 html {
     height: 100%;
 }
 body { 
     align-items: center;
+    color: #222;
     display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     justify-content: center;
     line-height: 1.5;
+    margin: 0;
     min-height: 100%;
-    padding: 1em;
+    padding: 2rem;
     text-align: center; 
 }
 .keys {
+    align-items: center;
     display: flex;
+    flex-grow: 1;
     flex-wrap: wrap;
     justify-content: center;
 }
@@ -20,6 +28,12 @@ body {
 .keysWhite {
     display: flex;
     justify-content: center;
+}
+.keysLeft {
+    margin-right: 1rem;
+}
+.keysRight {
+    margin-left: 1rem;
 }
 .key {
     align-items: flex-end;
@@ -30,8 +44,8 @@ body {
     color: #555;
     display: flex;
     font-family: inherit;
-    font-size: 11px;
-    line-height: 9px;
+    font-size: 10px;
+    line-height: 7px;
     height: 4rem;
     margin: 0.125rem;
     padding: 0.75rem;
@@ -47,4 +61,31 @@ body {
     background-color: #222;
     border-color: black;
     color:#ddd;
+}
+.waveform {
+    flex-grow: 0;
+}
+.segmentedControl {
+    display: flex;
+}
+.segmentedControl > :not(:last-child) {
+    margin-right: 1rem;
+}
+.segmentedControl input {
+    opacity: 0;
+    position: absolute;
+}
+.segmentedControl span {
+    border-radius: 2px;
+    font-size: 10px;
+    letter-spacing: .0625em;
+    padding: .25rem .5rem;
+    text-align: center;
+    text-transform: uppercase;
+    transition: all .2s ease-in-out;
+}
+.segmentedControl input:checked ~ span {
+    background-color: #222;
+    box-shadow: 0 0 0 .25rem #222;
+    color: white;
 }
